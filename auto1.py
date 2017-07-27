@@ -5,8 +5,13 @@
 @time: 2017/7/26 15:36
 '''
 import pyautogui as pg
+import time
+time.sleep(3)
 
-image=pg.screenshot("1.png",region=(800,800,20,20))
+image=pg.screenshot("screen.png")
+image2=pg.screenshot("target.png",region=(400,400,60,20))
+
+
 
 import time
 

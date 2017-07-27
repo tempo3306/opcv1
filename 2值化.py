@@ -8,7 +8,12 @@ import cv2,time
 from matplotlib import pyplot as plt
 a=time.clock()
 img=cv2.imread('1.jpg')
+print(img)
+
 grayimg=cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+
+
+
 ret,thresh1=cv2.threshold(grayimg,127,255,cv2.THRESH_BINARY)
 ret,thresh2=cv2.threshold(grayimg,127,255,cv2.THRESH_BINARY_INV)
 ret,thresh3=cv2.threshold(grayimg,127,255,cv2.THRESH_TRUNC)
