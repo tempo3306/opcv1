@@ -46,14 +46,33 @@ def writeFile(content):
         f.write('\n')
         f.close()
 
+import cv2
+import numpy as np
+SZ=20
+bin_n = 16 # Number of bins
+# svm_params = dict( kernel_type = cv2.SVM_LINEAR,svm_type = cv2.SVM_C_SVC,C=2.67, gamma=5.383 )
+affine_flags = cv2.WARP_INVERSE_MAP|cv2.INTER_LINEAR
+def hog(img):
+    gx = cv2.Sobel(img, cv2.CV_32F, 1, 0)
+    gy = cv2.Sobel(img, cv2.CV_32F, 0, 1)
+    mag, ang = cv2.cartToPolar(gx, gy)
+    bins = np.int32(bin_n * ang / (2 * np.pi))  # quantizing binvalues in (0...16)
+    bin_cells = bins[:10, :10], bins[10:, :10], bins[:10, 10:], bins[10:, 10:]
+    mag_cells = mag[:10, :10], mag[10:, :10], mag[:10, 10:], mag[10:, 10:]
+    hists = [np.bincount(b.ravel(), m.ravel(), bin_n) for b, m in zip(bin_cells, mag_cells)]
+    hist = np.hstack(hists)  # hist is a 64 bit vector
+    return hist
 
-if __name__ == '__main__':
-    dirs = u'J:/数据分析学习/python/机器学习之验证码识别/category/%s/'
+a=cv2.imread("screen.png")
 
-    for i in range(9):
-        for f in getfiles(dirs % (i)):
-            pixs = getBinaryPix(f).tolist()
-            pixs.append(i)
-            pixs = [str(i) for i in pixs]
-            content = ','.join(pixs)
-            writeFile(content)
+
+# if __name__ == '__main__':
+#     dirs = u'J:/数据分析学习/python/机器学习之验证码识别/category/%s/'
+#
+#     for i in range(9):
+#         for f in getfiles(dirs % (i)):
+#             pixs = getBinaryPix(f).tolist()
+#             pixs.append(i)
+#             pixs = [str(i) for i in pixs]
+#             content = ','.join(pixs)
+#             writeFile(content)

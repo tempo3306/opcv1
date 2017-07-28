@@ -2,8 +2,7 @@ import cv2
 import numpy as np
 SZ=20
 bin_n = 16 # Number of bins
-svm_params = dict( kernel_type = cv2.SVM_LINEAR,
-svm_type = cv2.SVM_C_SVC,C=2.67, gamma=5.383 )
+svm_params = dict( kernel_type = cv2.SVM_LINEAR,svm_type = cv2.SVM_C_SVC,C=2.67, gamma=5.383 )
 affine_flags = cv2.WARP_INVERSE_MAP|cv2.INTER_LINEAR
 ####可以将斜着的数字摆正
 def deskew(img):
