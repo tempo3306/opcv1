@@ -38,11 +38,14 @@ train_label = np.vstack((np.zeros((train_pts, 1), dtype='int32'), np.ones((train
 svm = cv2.ml.SVM_create()
 svm.setType(cv2.ml.SVM_C_SVC)  # SVM类型
 svm.setKernel(cv2.ml.SVM_LINEAR) # 使用线性核
-svm.setC(1.0)
+svm.setC(1)
+
 
 # 训练
 ret = svm.train(train_data, cv2.ml.ROW_SAMPLE, train_label)
-
+print("fsdfd")
+print(train_data.shape)
+print(train_label)
 # 测试数据，20个点[-2,2]
 pt = np.array(np.random.rand(20,2) * 4 - 2, dtype='float32')
 (ret, res) = svm.predict(pt)

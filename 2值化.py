@@ -10,7 +10,7 @@ import numpy as np
 import cv2,time
 from matplotlib import pyplot as plt
 a=time.clock()
-img=cv2.imread('86200.png')
+img=cv2.imread('10.png')
 print(img)
 # print(img[0:10,21:31])
 
@@ -21,11 +21,19 @@ ret,thresh1=cv2.threshold(grayimg,127,255,cv2.THRESH_BINARY_INV)
 # image,contours,hierarchy = cv2.findContours(thresh1,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_NONE)
 image,contours,hierarchy = cv2.findContours(thresh1,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_NONE)
 imgn=[]
+xy=[]
 print(len(contours))
 for i in range(len(contours)):
     cnt=contours[i]
     x,y,w,h=cv2.boundingRect(cnt)
     print(x,y,w,h)
+    xy.append([x,y,w,h])
+
+xy=sorted(xy)
+
+
+for i in range(len(contours)):
+    x,y,w,h=xy[i]
     imgn.append(image[y:y+h,x:x+w])
     # cv2.imshow("Mouth1", imgn[i])
     # cv2.waitKey(0)
