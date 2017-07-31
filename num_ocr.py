@@ -80,7 +80,8 @@ svm.setC(1)
 
 # 训练
 ret = svm.train(trainData, cv2.ml.ROW_SAMPLE, responses)
-img2=cv2.imread("86200.png",0)
+# img2=cv2.imread("86200.png",0)
+img2=cv2.imread("90100.png",0)
 testData=cut(img2)
 testData=list(map(hog,testData))
 # trainData=np.array(trainData,dtype='float32')
